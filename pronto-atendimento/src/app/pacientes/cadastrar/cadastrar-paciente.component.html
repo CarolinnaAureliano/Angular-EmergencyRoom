@@ -1,0 +1,72 @@
+<div class="container-fluid">
+
+  <form #formPaciente="ngForm">
+
+    <div class="form-group">
+      <label for="nome">Nome</label>
+      <input type="text" class="form-control" id="nome" name="nome" #nome="ngModel"
+      [(ngModel)]="paciente.nome" minlength="4" required>
+      <div class="alert alert-danger" *ngIf="nome.errors && (nome.dirty || nome.touched)">
+        <div [hidden]= "!nome.errors.required">
+          Nome
+        </div>
+        <div [hidden]= "!nome.errors.minlength">
+         Digite um nome valido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="genero">Genero</label>
+      <input type="text" class="form-control" id="genero" name="genero" #genero="ngModel"
+      [(ngModel)]="paciente.genero" minlength="4" maxlength="10" required>
+      <div class="alert alert-danger" *ngIf="genero.errors && (genero.dirty || genero.touched)">
+        <div [hidden]= "!genero.errors.required">
+          Genero
+        </div>
+        <div [hidden]= "!genero.errors.minlength">
+          O campo precisa ser preechido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="cpf">Cpf</label>
+      <input type="text" class="form-control" id="cpf" name="cpf" #cpf="ngModel"
+      [(ngModel)]="paciente.cpf" minlength="11" required>
+      <div class="alert alert-danger" *ngIf="cpf.errors && (cpf.dirty || cpf.touched)">
+        <div [hidden]= "!cpf.errors.required">
+          CPF
+        </div>
+        <div [hidden]= "!cpf.errors.minlength">
+          Digite um CPF valido
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="prioridade">Prioridade</label>
+      <select name="prioridade" id="prioridade" class="form-control" required [(ngModel)]= "paciente.prioridade" #prioridade="ngModel">
+          <option value="Com Prioridade">Com Prioridade</option>
+          <option value="Sem Prioridade">Sem Prioridade</option>
+      </select>
+
+      <div *ngIf="prioridade.errors && (prioridade.dirty || prioridade.touched)" class="alert alert-danger">
+          <div [hidden]= "!prioridade.errors.required">
+            Nivel
+          </div>
+          <div [hidden]="!prioridade.errors.value">
+            Escolha uma opçao valida
+          </div>
+        </div>
+  </div>
+
+    <div class="form-group text-center">
+      <input type="submit" class="btn btn-success" (click)="cadastrar()" value="Cadastrar" [disabled]="!formPaciente.form.valid">
+      <a class="btn btn-light" [routerLink]= "['/pacientes']">
+        <i class="bi bi-chevron-left"></i> Voltar
+      </a>
+    </div>
+  </form>
+
+</div>
